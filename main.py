@@ -1,13 +1,12 @@
 import os
 import sys
-import threading
-from PyQt5 import uic, Qt
+from PyQt5 import uic
 from PyQt5.QtCore import QThread
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
 import time
-from multiprocessing import Process
-from Audio.audio import Audio
 import playsound
+
+from Audio.audio_routine import audio_routine
 from Camera.video_eyes_detection import eyes_detect
 
 
@@ -17,8 +16,6 @@ def resource_path(relative_path):
     base_path = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(base_path, relative_path)
 
-
-lock = threading.Lock()
 
 form = resource_path('static/main.ui')
 form_class = uic.loadUiType(form)[0]
@@ -34,41 +31,142 @@ menu = {
 table_idx_lookup = {'korean': 0, 'bacban': 1, 'schoolfood': 2, 'Westernfood': 3, 'japanesefood': 4, 'beverage': 5}
 menu_list = ['korean', 'bacban', 'schoolfood', 'Westernfood', 'japanesefood', 'beverage']
 
-answer_list = ['아니', '아니오', '아니요', '네', '내', '넵', '냅', '넹', '냉', '넨', '낸', '웅', '응', '그래', '그레', '구래', '구레', '고래', '고레']
-first_list = ['한식', '백반', '분식', '양식', '일식', '음료']
-second_list = []
 
-
-# 음성 인식 함수
-def audio_routine(step):
-    audio = Audio()
-    text = audio.listen()
-    text_correct = audio.text_correction(text)
-    text_word_list = audio.detect_word(text_correct)
-
-    # 음성 안내 확인 단계
-    if step == 0:
-        for i, t in enumerate(answer_list):
-            print("i  - ", i, "// t -- ", t)
-            if t in text_word_list:
-                return i
-
-    # 메뉴 선정 단계
-    elif step == 1:
-        for i, t in enumerate(first_list):
-            if t in text_word_list:
-                return i
-
-    return -1
-
-
-class Thread1(QThread):
+# 눈 인식 쓰레드
+class EyesThread(QThread):
     def __init__(self, parent):
         super().__init__(parent)
         self.parent = parent
 
     def run(self):
-        self.parent.stackedWidget.setCurrentIndex(2)
+        eyes_detect()
+        time.sleep(0.3)
+        self.parent.audioButton.click()
+
+
+# 오디오 쓰레드
+class AudioThread(QThread):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.parent = parent
+        self.step_state = 0
+        self.menu = menu
+
+    def run(self):
+        if self.step1() == 0:  # 음성 안내
+            self.step_state = 1
+            while True:
+                n = self.step2()
+                if n != -1:  # 메뉴 선택
+                    self.step_state = 2
+                    if self.step3(n) == 0:  # 음식 선택
+                        self.step_state = 3
+                        again_or_pay = self.step4()  # 추가 주문 or 결제
+                        if again_or_pay == 1:
+                            continue  # 추가 주문
+                        elif again_or_pay == 0:
+                            self.step5_final()  # 결제
+                        else:
+                            break
+                    else:
+                        break
+                else:
+                    break
+
+    def step1(self):
+        count = 0
+        while count < 3:
+            playsound.playsound("static/mp3_file/play1.mp3")
+            print("음성으로 안내받길 원하시나요?")
+            n = audio_routine(0)
+            if n < 3:  # 대답이 부정 혹은 오류 일때
+                if count < 2:  # 3번만 확인
+                    playsound.playsound("static/mp3_file/again.mp3")
+                    count += 1
+                else:
+                    self.parent.stackedWidget.setCurrentIndex(0)
+                    return -1
+            else:
+                self.parent.stackedWidget.setCurrentIndex(2)
+                return 0
+
+    def step2(self):
+        count = 0
+        while count < 2:
+            playsound.playsound("static/mp3_file/play2.mp3")
+
+            print("어떤 메뉴를 원하시나요? 한식, 백반, 분식, 양식, 일식, 음료")
+            n = audio_routine(1)
+            if n == -1:
+                if count < 1:  # 2번만 확인
+                    playsound.playsound("static/mp3_file/again.mp3")
+                    count += 1
+                else:
+                    self.parent.menuStackedWidget_Audio_Audio.setCurrentIndex(0)
+                    return -1
+            else:
+                self.parent.menuStackedWidget_Audio.setCurrentIndex(n)
+                return n
+
+    def step3(self, m):
+        count = 0
+        while count < 2:
+            print("해당 메뉴의 종류는 ~,~,~ 가 있습니다. 원하시는 메뉴를 말해주세요. ")
+            if m == 0:
+                playsound.playsound("static/mp3_file/menu1.mp3")
+            elif m == 1:
+                playsound.playsound("static/mp3_file/menu2.mp3")
+            elif m == 2:
+                playsound.playsound("static/mp3_file/menu3.mp3")
+            elif m == 3:
+                playsound.playsound("static/mp3_file/menu4.mp3")
+            elif m == 4:
+                playsound.playsound("static/mp3_file/menu5.mp3")
+            elif m == 5:
+                playsound.playsound("static/mp3_file/menu6.mp3")
+            else:
+                playsound.playsound("static/mp3_file/error.mp3")
+
+            n, key = audio_routine(2)
+            if n == -1:
+                if count < 1:  # 2번만 확인
+                    playsound.playsound("static/mp3_file/again.mp3")
+                    count += 1
+                else:
+                    self.parent.menuStackedWidget_Audio.setCurrentIndex(0)
+                    return -1
+            else:
+                self.order_insert(self.menu[key][n])
+                print("선택 완료")
+                playsound.playsound("static/mp3_file/choice_complete.mp3")
+                return 0
+
+    def step4(self):
+        count = 0
+        while count < 2:
+            playsound.playsound("static/mp3_file/play4.mp3")
+            print("추가 주문을 하시겠습니까? 아니면 결제하시겠습니까?")
+            n = audio_routine(3)
+            if n == -1:
+                if count < 1:  # 2번만 확인
+                    playsound.playsound("static/mp3_file/again.mp3")
+                    count += 1
+                else:
+                    self.parent.menuStackedWidget_Audio.setCurrentIndex(0)
+                    return -1
+            elif n < 4:
+                return 0
+            else:
+                return 1
+
+    def step5_final(self):
+        print("허리 부근 중앙 오른쪽에 카드 리더기가 있습니다. ")
+
+        print("결제 완료")
+
+    # 메뉴를 장바구니에 추가하는 함수
+    def order_insert(self, m):
+        self.parent.order_list.append(m)
 
 
 # 화면을 띄우는데 사용되는 Class 선언
@@ -78,6 +176,7 @@ class WindowClass(QMainWindow, form_class):
         self.n = 0
         self.setupUi(self)
         self.step = 0
+        self.order_list = []
         # 색 지정
         # self.centralwidget.setStyleSheet("background-color: white")
         # self.stackedWidget.setStyleSheet("background-color: white")
@@ -118,7 +217,9 @@ class WindowClass(QMainWindow, form_class):
         self.menuStackedWidget.setCurrentIndex(0)
         self.menuStackedWidget_Audio.setCurrentIndex(0)
 
-        # self.stackedWidget.currentChanged.connect(self.changePage)
+        self.eyes_routine()
+
+    # ------- init -------#
 
     # homeButton 이 눌리면 작동할 함수
     def homeButtonFunction(self):
@@ -132,61 +233,21 @@ class WindowClass(QMainWindow, form_class):
     def takeOutButtonFunction(self):
         self.stackedWidget.setCurrentIndex(1)
 
-    def play1(self):
-        with lock:
-            playsound.playsound('play1.mp3')
+    # 눈 인식 쓰레드 함수
+    def eyes_routine(self):
+        eyes_thread = EyesThread(self)
+        eyes_thread.start()
 
-    def play2(self):
-        with lock:
-            playsound.playsound('play2.mp3')
-
-    def audio1(self):
-        self.n = audio_routine(0)
-
-    def changead(self):
-        print("음성안내 숫자 ", self.n)
-        if self.n < 3:
-            self.stackedWidget.setCurrentIndex(1)
-        else:
-            self.stackedWidget.setCurrentIndex(2)
-
-    def change_index(self):
-        self.stackedWidget.setCurrentIndex(2)
+    # 오디오 인식 쓰레드 함수
+    def audio_routine(self):
+        t = AudioThread(self)
+        t.start()
 
     # audioButton 이 눌리면 작동할 함수
     def audioButtonFunction(self):
-        self.n = audio_routine(0)
-        self.stackedWidget.setCurrentIndex(2)
-        """
-        th1 = threading.Thread(target=self.change_index)
-        th1.start()
+        # 음성 인식
+        self.audio_routine()
 
-        # 음성 인식 루틴
-        th2 = threading.Thread(target=self.play1)
-        th2.start()
-        th2.join()
-        print("음성으로 안내받길 원하시나요?")
-        th3 = threading.Thread(target=self.audio1)
-        th3.start()
-        th3.join()
-
-        th4 = threading.Thread(target=self.changead)
-        th4.start()
-        th4.join()
-
-        th5 = threading.Thread(target=self.play2)
-        th5.start()
-        th5.join()
-        print("어떤 메뉴를 원하시나요? 한식, 백반, 분식, 양식, 일식, 음료")
-        th6 = threading.Thread(target=self.audio1)
-        th6.start()
-        th6.join()
-        n = audio_routine(1)
-        if n == -1:
-            self.stackedWidget.setCurrentIndex(1)
-        else:
-            self.StackedWidget.setCurrentIndex(n)
-        """
     # 한식 버튼 함수
     def menu1ButtonFunction(self):
         self.menuStackedWidget.setCurrentIndex(0)
@@ -219,11 +280,14 @@ class WindowClass(QMainWindow, form_class):
             item = QTableWidgetItem(val)
             item.setTextAlignment(4)
 
-            if col > 9 and r == 1:
+            if col > 4 and r == 0:
+                r = 1
+                n = 0
+            elif col > 9 and r == 1:
                 r = 2
                 n = 0
-            elif col > 5 and r == 0:
-                r = 1
+            elif col > 14 and r == 2:
+                r = 3
                 n = 0
             tf.setItem(r, n, item)
             n += 1
@@ -237,8 +301,4 @@ def window_start():
 
 
 if __name__ == "__main__":
-
-    p2 = Process(target=eyes_detect)
-    p2.start()
-    p2.join()
-
+    window_start()

@@ -3,8 +3,6 @@ import dlib
 import numpy as np
 from imutils import face_utils
 from keras.models import load_model
-import tensorflow
-
 
 # https://github.com/kairess/eye_blink_detector
 # https://github.com/davisking/dlib-models
@@ -26,6 +24,7 @@ import tensorflow
 # conda install -c conda-forge dlib
 # conda install -c conda-forge/label/cf201901 dlib
 # conda install -c conda-forge/label/cf202003 dlib
+
 
 def crop_eye(gray, eye_points):
     IMG_SIZE = (34, 26)
@@ -63,7 +62,6 @@ def eyes_detect():
 
     if not cap.isOpened():
         print('Video open failed!')
-
 
     count = 0
     while cap.isOpened():
@@ -108,7 +106,10 @@ def eyes_detect():
 
             if pred_l < 0.3 and pred_r < 0.3:
                 count += 1
+            elif pred_l > 0.8 or pred_r > 0.8:
+                count = 0
 
+        """
             cv2.rectangle(img, pt1=tuple(eye_rect_l[0:2]), pt2=tuple(eye_rect_l[2:4]), color=(255, 255, 255),
                           thickness=2)
             cv2.rectangle(img, pt1=tuple(eye_rect_r[0:2]), pt2=tuple(eye_rect_r[2:4]), color=(255, 255, 255),
@@ -120,6 +121,6 @@ def eyes_detect():
         cv2.imshow('result', img)
         if cv2.waitKey(1) == ord('q'):
             break
-
-        if count > 16:
+        """
+        if count > 25:
             return True
