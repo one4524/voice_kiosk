@@ -80,7 +80,7 @@ class Audio:
     def listen(self):
         with sr.Microphone() as source:
             print("Say something!")
-            audio = self.r.listen(source, phrase_time_limit=5)
+            audio = self.r.listen(source)
 
         audio_contents = base64.b64encode(audio.get_wav_data()).decode("utf8")
 
