@@ -1,9 +1,8 @@
 import sqlite3
 import os
 
-
 # db 경로
-db_path = os.getenv('HOME')+'/etridb.db'
+db_path = os.getenv('HOME') + '/etridb.db'
 
 
 # 테이블 생성
@@ -44,6 +43,7 @@ def create_table():
 
     # db와 연결 종료
     conn.close()
+
 
 # DB에 메뉴 목록 insert
 def insert_menus():
@@ -105,6 +105,7 @@ def insert_menus():
     # db와 연결 종료
     conn.close()
 
+
 # DB에 주문 내역 insert
 def insert_order(data):
     # db와 연결
@@ -123,9 +124,10 @@ def insert_order(data):
     item_list = c.fetchall()
     for i in item_list:
         print(i)
-    
+
     # db와 연결 종료
     conn.close()
+
 
 # DB에서 메뉴 정보 가져오기
 def menu_info(category):
@@ -145,17 +147,20 @@ def menu_info(category):
     conn.close()
     return menu_info
 
+
 # 테이블 삭제
-def drop_table():
+def drop_table(table_name):
     # db와 연결
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
 
-    # 테이블이 이미 존재할 경우 삭제
-    c.execute("DROP TABLE IF EXISTS orders")
-    c.execute("DROP TABLE IF EXISTS menus")
+    # 테이블이 이미 존재할 경우 삭제\
+    # ex) orders  / menus
+    c.execute(f"DROP TABLE IF EXISTS {table_name}")
+
     # db와 연결 종료
     conn.close()
+
 
 # DB 삽입을 위한 데이터
 def data_transform(order_number, order_list, order_count_list):
@@ -163,6 +168,7 @@ def data_transform(order_number, order_list, order_count_list):
     for i in range(len(order_list)):
         data.append((order_number, order_list[i], order_count_list[i]))
     return data
+
 
 ### 테스트
 # drop_table()

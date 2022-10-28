@@ -1,5 +1,6 @@
 import torch
 import tensorflow as tf
+import sqlite3
 
 device = torch.device('mps')
 print(f" - device : {device}")
@@ -9,6 +10,7 @@ print(sample)
 sample = sample.to(device)
 print(f" - gpu tensor : ")
 print(sample)
+
 
 tf.__version__()
 

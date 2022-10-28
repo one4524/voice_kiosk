@@ -1,12 +1,12 @@
 import os
 import sys
 from PyQt5 import uic
-from PyQt5.QtCore import QThread, QEventLoop, QTimer
+from PyQt5.QtCore import QThread, QEventLoop, QTimer, QSize
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QListWidgetItem
 import playsound
-import time
 from Audio.audio_routine import audio_routine
 from Camera.video import EyesThread
+from db import insert_menus, insert_order, data_transform, create_table, drop_table
 
 
 # UI파일 연결
@@ -87,7 +87,7 @@ class AudioThread(QThread):
         while count < 2:
             playsound.playsound("static/mp3_file/play2.mp3")
 
-            print("어떤 메뉴를 원하시나요? 한식, 백반, 분식, 양식, 일식, 음료")
+            print("어떤 메뉴를 원하시나요? 한식, 중식, 분식, 양식, 일식, 음료")
             n = audio_routine(1)
             if n == -1:
                 if count < 1:  # 2번만 확인
@@ -131,6 +131,19 @@ class AudioThread(QThread):
                     return -1
             else:
                 self.order_insert(self.menu[key][n])
+                if key == menu_list[0]:
+                    self.parent.cell_clicked_event1(0, n)
+                elif key == menu_list[1]:
+                    self.parent.cell_clicked_event2(0, n)
+                elif key == menu_list[2]:
+                    self.parent.cell_clicked_event3(0, n)
+                elif key == menu_list[3]:
+                    self.parent.cell_clicked_event4(0, n)
+                elif key == menu_list[4]:
+                    self.parent.cell_clicked_event5(0, n)
+                elif key == menu_list[5]:
+                    self.parent.cell_clicked_event6(0, n)
+
                 print("선택 완료")
                 playsound.playsound("static/mp3_file/choice_complete.mp3")
                 return 0
@@ -153,10 +166,9 @@ class AudioThread(QThread):
                 return 1
 
     def step5_final(self):
-        print("허리 부근 중앙 오른쪽에 카드 리더기가 있습니다. ")
-
+        print("허리 부근 중앙 오른쪽에 카드 리더기가 있습니다.")
         print("결제 완료")
-        self.parent.stackedWidget.setCurrentIndex(0)
+        self.pay_button_clicked_event()
 
     # 메뉴를 장바구니에 추가하는 함수
     def order_insert(self, m):
@@ -178,7 +190,9 @@ class WindowClass(QMainWindow, form_class):
         self.audio_thread = AudioThread(self)
         self.eyes_thread = EyesThread(self)
         self.step = 0
+        self.order_number = 0
         self.order_list = []
+        self.order_count_list = []
         self.select_list_item = -1
         # 색 지정
         # self.centralwidget.setStyleSheet("background-color: white")
@@ -219,8 +233,11 @@ class WindowClass(QMainWindow, form_class):
 
         # pay(결제) 창 이벤트
         self.selectMenuList.itemClicked.connect(self.list_item_selected_event)
+        self.selectMenuCountList.itemClicked.connect(self.list_item_selected_event)
         self.deleteMenuButton.clicked.connect(self.list_item_delete_event)
         self.payButton.clicked.connect(self.pay_button_clicked_event)
+        self.addCountButton.clicked.connect(self.item_count_add_event)
+        self.deleteCountButton.clicked.connect(self.item_count_minus_event)
 
         # 처음 화면 세팅
         self.stackedWidget.setCurrentIndex(0)
@@ -237,44 +254,110 @@ class WindowClass(QMainWindow, form_class):
         self.audioButton.setEnabled(bool_button)
 
     # ------ 메뉴 셀 클릭 이벤트 함수들 ------ #
+
     def cell_clicked_event1(self, row, col):
-        data = menu[menu_list[0]][row * 5 + col]
-        self.order_list.append(data)
-        self.add_list_item(data)
+        index = row * 5 + col
+        column = menu_list[0]
+        if index < len(menu[column]):
+            data = menu[column][index]
+            self.check_same_menu(data)
 
     def cell_clicked_event2(self, row, col):
-        data = menu[menu_list[1]][row * 5 + col]
-        self.order_list.append(data)
-        self.add_list_item(data)
+        index = row * 5 + col
+        column = menu_list[1]
+        if index < len(menu[column]):
+            data = menu[column][index]
+            self.check_same_menu(data)
 
     def cell_clicked_event3(self, row, col):
-        data = menu[menu_list[2]][row * 5 + col]
-        self.order_list.append(data)
-        self.add_list_item(data)
+        index = row * 5 + col
+        column = menu_list[2]
+        if index < len(menu[column]):
+            data = menu[column][index]
+            self.check_same_menu(data)
 
     def cell_clicked_event4(self, row, col):
-        data = menu[menu_list[3]][row * 5 + col]
-        self.order_list.append(data)
-        self.add_list_item(data)
+        index = row * 5 + col
+        column = menu_list[3]
+        if index < len(menu[column]):
+            data = menu[column][index]
+            self.check_same_menu(data)
 
     def cell_clicked_event5(self, row, col):
-        data = menu[menu_list[4]][row * 5 + col]
-        self.order_list.append(data)
-        self.add_list_item(data)
+        index = row * 5 + col
+        column = menu_list[4]
+        if index < len(menu[column]):
+            data = menu[column][index]
+            self.check_same_menu(data)
 
     def cell_clicked_event6(self, row, col):
-        data = menu[menu_list[5]][row * 5 + col]
-        self.order_list.append(data)
-        self.add_list_item(data)
+        index = row * 5 + col
+        column = menu_list[5]
+        if index < len(menu[column]):
+            data = menu[column][index]
+            self.check_same_menu(data)
+
+    # 아이템 개수 추가 이벤트
+    def item_count_add_event(self):
+        if self.select_list_item >= 0:
+            self.order_count_list[self.select_list_item] += 1
+            self.selectMenuCountList.takeItem(self.select_list_item)
+            item = QListWidgetItem(str(self.order_count_list[self.select_list_item]))
+            item.setSizeHint(QSize(30, 30))
+            item.setTextAlignment(4)
+            self.selectMenuCountList.insertItem(self.select_list_item, item)
+
+    # 아이템 개수 빼기 이벤트
+    def item_count_minus_event(self):
+        if self.select_list_item >= 0:
+            if self.order_count_list[self.select_list_item] == 1:
+                self.selectMenuCountList.takeItem(self.select_list_item)
+                self.selectMenuList.takeItem(self.select_list_item)
+            else:
+                self.order_count_list[self.select_list_item] -= 1
+                self.selectMenuCountList.takeItem(self.select_list_item)
+                item = QListWidgetItem(str(self.order_count_list[self.select_list_item]))
+                item.setSizeHint(QSize(30, 30))
+                item.setTextAlignment(4)
+                self.selectMenuCountList.insertItem(self.select_list_item, item)
 
     def add_list_item(self, data):
         item = QListWidgetItem(data)
+        item.setSizeHint(QSize(300, 30))
+        item.setTextAlignment(4)
         self.selectMenuList.addItem(item)
+
+    def add_list_item_count(self, data):
+        item = QListWidgetItem(data)
+        item.setSizeHint(QSize(30, 30))
+        item.setTextAlignment(4)
+        self.selectMenuCountList.addItem(item)
+
+    # 같은 음식을 눌렀을 때 중복인지 체크하는 함수
+    def check_same_menu(self, data):
+        same = False
+        index = -1
+        for i, d in enumerate(self.order_list):
+            if data == d:
+                same = True
+                index = i
+
+        if not same:
+            self.order_list.append(data)
+            self.order_count_list.append(1)
+            self.add_list_item(data)
+            self.add_list_item_count(str(1))
+        else:
+            self.order_count_list[index] += 1
+            self.selectMenuCountList.takeItem(index)
+            item = QListWidgetItem(str(self.order_count_list[index]))
+            item.setSizeHint(QSize(30, 30))
+            item.setTextAlignment(4)
+            self.selectMenuCountList.insertItem(index, item)
 
     # ------ 메뉴 셀 클릭 이벤트 함수들 end ------ #
 
     # ---- pay(결제) 창 관련 함수들 ---- #
-
     def list_item_selected_event(self):
         select_item_row = self.selectMenuList.currentRow()
         self.select_list_item = select_item_row
@@ -282,9 +365,16 @@ class WindowClass(QMainWindow, form_class):
 
     def list_item_delete_event(self):
         if self.select_list_item != -1:
+            self.order_list.pop(self.select_list_item)
+            self.order_count_list.pop(self.select_list_item)
             self.selectMenuList.takeItem(self.select_list_item)
+            self.selectMenuCountList.takeItem(self.select_list_item)
+            self.select_list_item = -1
 
     def pay_button_clicked_event(self):
+        # db에 주문 내역 저장
+        insert_order(data_transform(self.order_number, self.order_list, self.order_count_list))
+        self.order_number += 1
         self.stackedWidget.setCurrentIndex(2)
         reset()
         self.homeButtonFunction()
@@ -297,7 +387,9 @@ class WindowClass(QMainWindow, form_class):
         self.menuStackedWidget.setCurrentIndex(0)
         self.homeButton.setVisible(False)
         self.order_list.clear()
+        self.order_count_list.clear()
         self.selectMenuList.clear()
+        self.selectMenuCountList.clear()
         self.select_list_item = -1
         self.tableWidget_1.clearSelection()
         self.tableWidget_2.clearSelection()
@@ -386,4 +478,7 @@ def window_start():
 
 
 if __name__ == "__main__":
-    window_start()
+    drop_table("menus") # menus 테이블이 존재할 경우 삭제
+    create_table()  # orders 와 menus 테이블 생성 but 이미 존재할 시 생성 안함
+    insert_menus()  # 메뉴판 정보 저장
+    window_start()  # qt 시작
