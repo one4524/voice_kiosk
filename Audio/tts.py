@@ -1,5 +1,12 @@
 from gtts import gTTS
 
+
+def make_tts(text):
+    tts_make = gTTS(text=text, lang='ko')
+
+    tts_make.save("order_list.mp3")
+
+
 t1 = "음성으로 안내받기를 원하시나요?"
 t2 = "메뉴는 한식, 백반, 분식, 양식, 일식, 음료 중 어떤 것을 원하시나요?"
 t3 = "선택 완료했습니다."
@@ -13,7 +20,6 @@ m6 = "음료 메뉴의 종류는 '물', '콜라', '사이다', '환타', '제로
 
 err = "잘못된 메뉴입니다."
 again = "다시 말해주세요."
-
 
 tts = gTTS(text=t1, lang='ko')
 

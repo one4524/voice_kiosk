@@ -31,6 +31,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color:white;</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -45,6 +48,165 @@
     </size>
    </property>
    <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QWidget" name="titleWidget" native="true">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>800</width>
+        <height>80</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>800</width>
+        <height>80</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(58, 134, 255);
+color: rgb(255, 255, 255);
+padding:0px;</string>
+      </property>
+      <layout class="QHBoxLayout" name="titleLayout" stretch="0,10,0">
+       <property name="spacing">
+        <number>-1</number>
+       </property>
+       <property name="sizeConstraint">
+        <enum>QLayout::SetMaximumSize</enum>
+       </property>
+       <property name="leftMargin">
+        <number>10</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <property name="rightMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="homeButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>60</width>
+           <height>60</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(251, 86, 7);
+	background-color: white;
+	border: 2px solid rgb(251, 86, 7);
+	border-radius: 5px;</string>
+         </property>
+         <property name="text">
+          <string>home</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="title">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;부기식당&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>60</width>
+           <height>60</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: 2px solid rgb(58, 134, 255);</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QWidget" name="bottomWidget" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>760</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(58, 134, 255);</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border:0px;</string>
+         </property>
+         <property name="text">
+          <string>BY Boogie Voice</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
     <item row="1" column="0" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="minimumSize">
@@ -52,6 +214,9 @@
         <width>800</width>
         <height>750</height>
        </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: white;</string>
       </property>
       <property name="currentIndex">
        <number>1</number>
@@ -73,6 +238,11 @@
         </property>
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: white;
+	background-color: rgb(0, 144, 81);
+	border-radius: 20px;</string>
         </property>
         <property name="text">
          <string>매장 이용</string>
@@ -98,6 +268,11 @@
         <property name="toolTipDuration">
          <number>0</number>
         </property>
+        <property name="styleSheet">
+         <string notr="true">color: white;
+	background-color: rgb(0, 84, 147);
+	border-radius: 20px;</string>
+        </property>
         <property name="text">
          <string>메뉴 포장</string>
         </property>
@@ -119,6 +294,11 @@
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
         </property>
+        <property name="styleSheet">
+         <string notr="true">color: white;
+	background-color: rgb(121, 121, 121);
+	border-radius: 10px;</string>
+        </property>
         <property name="text">
          <string>음성으로 안내</string>
         </property>
@@ -134,18 +314,46 @@
           <height>450</height>
          </rect>
         </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: white;
+border: 2px solid rgb(58, 134, 255);
+border-radius: 15px;
+color:rgb(58, 134, 255);</string>
+        </property>
         <property name="currentIndex">
          <number>5</number>
         </property>
         <widget class="QWidget" name="menu1">
+         <property name="styleSheet">
+          <string notr="true">border:0px;
+border-radius: 12px;</string>
+         </property>
          <widget class="QTableWidget" name="tableWidget_1">
           <property name="geometry">
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>760</width>
-            <height>450</height>
+            <width>756</width>
+            <height>446</height>
            </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border-radius: 12px;</string>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
           </property>
           <property name="rowCount">
            <number>4</number>
@@ -160,10 +368,10 @@
            <bool>false</bool>
           </attribute>
           <attribute name="horizontalHeaderMinimumSectionSize">
-           <number>100</number>
+           <number>151</number>
           </attribute>
           <attribute name="horizontalHeaderDefaultSectionSize">
-           <number>126</number>
+           <number>151</number>
           </attribute>
           <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
            <bool>false</bool>
@@ -175,10 +383,10 @@
            <bool>false</bool>
           </attribute>
           <attribute name="verticalHeaderMinimumSectionSize">
-           <number>10</number>
+           <number>180</number>
           </attribute>
           <attribute name="verticalHeaderDefaultSectionSize">
-           <number>140</number>
+           <number>200</number>
           </attribute>
           <row/>
           <row/>
@@ -192,191 +400,30 @@
          </widget>
         </widget>
         <widget class="QWidget" name="menu2">
+         <property name="styleSheet">
+          <string notr="true">border-radius: 12px;
+border:0px;</string>
+         </property>
          <widget class="QTableWidget" name="tableWidget_2">
           <property name="geometry">
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>760</width>
-            <height>450</height>
+            <width>756</width>
+            <height>446</height>
            </rect>
           </property>
-          <property name="rowCount">
-           <number>4</number>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
-          <property name="columnCount">
-           <number>5</number>
+          <property name="styleSheet">
+           <string notr="true">border-radius: 12px;</string>
           </property>
-          <attribute name="horizontalHeaderVisible">
-           <bool>false</bool>
-          </attribute>
-          <attribute name="horizontalHeaderMinimumSectionSize">
-           <number>100</number>
-          </attribute>
-          <attribute name="horizontalHeaderDefaultSectionSize">
-           <number>126</number>
-          </attribute>
-          <attribute name="verticalHeaderVisible">
-           <bool>false</bool>
-          </attribute>
-          <attribute name="verticalHeaderMinimumSectionSize">
-           <number>10</number>
-          </attribute>
-          <attribute name="verticalHeaderDefaultSectionSize">
-           <number>140</number>
-          </attribute>
-          <row/>
-          <row/>
-          <row/>
-          <row/>
-          <column/>
-          <column/>
-          <column/>
-          <column/>
-          <column/>
-         </widget>
-        </widget>
-        <widget class="QWidget" name="menu3">
-         <widget class="QTableWidget" name="tableWidget_3">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>760</width>
-            <height>450</height>
-           </rect>
-          </property>
-          <property name="rowCount">
-           <number>4</number>
-          </property>
-          <property name="columnCount">
-           <number>5</number>
-          </property>
-          <attribute name="horizontalHeaderVisible">
-           <bool>false</bool>
-          </attribute>
-          <attribute name="horizontalHeaderMinimumSectionSize">
-           <number>100</number>
-          </attribute>
-          <attribute name="horizontalHeaderDefaultSectionSize">
-           <number>126</number>
-          </attribute>
-          <attribute name="verticalHeaderVisible">
-           <bool>false</bool>
-          </attribute>
-          <attribute name="verticalHeaderMinimumSectionSize">
-           <number>1</number>
-          </attribute>
-          <attribute name="verticalHeaderDefaultSectionSize">
-           <number>140</number>
-          </attribute>
-          <row/>
-          <row/>
-          <row/>
-          <row/>
-          <column/>
-          <column/>
-          <column/>
-          <column/>
-          <column/>
-         </widget>
-        </widget>
-        <widget class="QWidget" name="menu4">
-         <widget class="QTableWidget" name="tableWidget_4">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>760</width>
-            <height>450</height>
-           </rect>
-          </property>
-          <property name="rowCount">
-           <number>4</number>
-          </property>
-          <property name="columnCount">
-           <number>5</number>
-          </property>
-          <attribute name="horizontalHeaderVisible">
-           <bool>false</bool>
-          </attribute>
-          <attribute name="horizontalHeaderMinimumSectionSize">
-           <number>100</number>
-          </attribute>
-          <attribute name="horizontalHeaderDefaultSectionSize">
-           <number>126</number>
-          </attribute>
-          <attribute name="verticalHeaderVisible">
-           <bool>false</bool>
-          </attribute>
-          <attribute name="verticalHeaderDefaultSectionSize">
-           <number>140</number>
-          </attribute>
-          <row/>
-          <row/>
-          <row/>
-          <row/>
-          <column/>
-          <column/>
-          <column/>
-          <column/>
-          <column/>
-         </widget>
-        </widget>
-        <widget class="QWidget" name="menu5">
-         <widget class="QTableWidget" name="tableWidget_5">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>760</width>
-            <height>450</height>
-           </rect>
-          </property>
-          <property name="rowCount">
-           <number>4</number>
-          </property>
-          <property name="columnCount">
-           <number>5</number>
-          </property>
-          <attribute name="horizontalHeaderVisible">
-           <bool>false</bool>
-          </attribute>
-          <attribute name="horizontalHeaderMinimumSectionSize">
-           <number>100</number>
-          </attribute>
-          <attribute name="horizontalHeaderDefaultSectionSize">
-           <number>126</number>
-          </attribute>
-          <attribute name="verticalHeaderVisible">
-           <bool>false</bool>
-          </attribute>
-          <attribute name="verticalHeaderDefaultSectionSize">
-           <number>140</number>
-          </attribute>
-          <row/>
-          <row/>
-          <row/>
-          <row/>
-          <column/>
-          <column/>
-          <column/>
-          <column/>
-          <column/>
-         </widget>
-        </widget>
-        <widget class="QWidget" name="menu6">
-         <widget class="QTableWidget" name="tableWidget_6">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>760</width>
-            <height>450</height>
-           </rect>
-          </property>
-          <property name="focusPolicy">
-           <enum>Qt::NoFocus</enum>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
           </property>
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
@@ -394,16 +441,294 @@
            <bool>false</bool>
           </attribute>
           <attribute name="horizontalHeaderMinimumSectionSize">
-           <number>100</number>
+           <number>151</number>
           </attribute>
           <attribute name="horizontalHeaderDefaultSectionSize">
-           <number>126</number>
+           <number>151</number>
           </attribute>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>
           </attribute>
+          <attribute name="verticalHeaderMinimumSectionSize">
+           <number>180</number>
+          </attribute>
           <attribute name="verticalHeaderDefaultSectionSize">
-           <number>140</number>
+           <number>200</number>
+          </attribute>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <column/>
+          <column/>
+          <column/>
+          <column/>
+          <column/>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="menu3">
+         <property name="styleSheet">
+          <string notr="true">border-radius: 12px;
+border:0px;
+</string>
+         </property>
+         <widget class="QTableWidget" name="tableWidget_3">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>756</width>
+            <height>446</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border-radius: 12px;</string>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="rowCount">
+           <number>4</number>
+          </property>
+          <property name="columnCount">
+           <number>5</number>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>151</number>
+          </attribute>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>151</number>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderMinimumSectionSize">
+           <number>180</number>
+          </attribute>
+          <attribute name="verticalHeaderDefaultSectionSize">
+           <number>200</number>
+          </attribute>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <column/>
+          <column/>
+          <column/>
+          <column/>
+          <column/>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="menu4">
+         <property name="styleSheet">
+          <string notr="true">border-radius: 12px;
+border:0px;</string>
+         </property>
+         <widget class="QTableWidget" name="tableWidget_4">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>756</width>
+            <height>446</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border-radius: 12px;</string>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="rowCount">
+           <number>4</number>
+          </property>
+          <property name="columnCount">
+           <number>5</number>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>151</number>
+          </attribute>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>151</number>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderMinimumSectionSize">
+           <number>180</number>
+          </attribute>
+          <attribute name="verticalHeaderDefaultSectionSize">
+           <number>200</number>
+          </attribute>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <column/>
+          <column/>
+          <column/>
+          <column/>
+          <column/>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="menu5">
+         <property name="styleSheet">
+          <string notr="true">border-radius: 12px;
+border:0px;</string>
+         </property>
+         <widget class="QTableWidget" name="tableWidget_5">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>756</width>
+            <height>446</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border-radius: 12px;</string>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="rowCount">
+           <number>4</number>
+          </property>
+          <property name="columnCount">
+           <number>5</number>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>151</number>
+          </attribute>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>151</number>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderMinimumSectionSize">
+           <number>180</number>
+          </attribute>
+          <attribute name="verticalHeaderDefaultSectionSize">
+           <number>200</number>
+          </attribute>
+          <row/>
+          <row/>
+          <row/>
+          <row/>
+          <column/>
+          <column/>
+          <column/>
+          <column/>
+          <column/>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="menu6">
+         <property name="styleSheet">
+          <string notr="true">border-radius: 12px;
+border:0px;</string>
+         </property>
+         <widget class="QTableWidget" name="tableWidget_6">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>756</width>
+            <height>446</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border-radius: 12px;</string>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="rowCount">
+           <number>4</number>
+          </property>
+          <property name="columnCount">
+           <number>5</number>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>151</number>
+          </attribute>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>151</number>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderMinimumSectionSize">
+           <number>180</number>
+          </attribute>
+          <attribute name="verticalHeaderDefaultSectionSize">
+           <number>200</number>
           </attribute>
           <row/>
           <row/>
@@ -417,155 +742,28 @@
          </widget>
         </widget>
        </widget>
-       <widget class="QWidget" name="widget" native="true">
-        <property name="geometry">
-         <rect>
-          <x>70</x>
-          <y>0</y>
-          <width>650</width>
-          <height>80</height>
-         </rect>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <widget class="QWidget" name="horizontalLayoutWidget">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>651</width>
-           <height>81</height>
-          </rect>
-         </property>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
-           <widget class="QPushButton" name="menuButton_1">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>60</height>
-             </size>
-            </property>
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="text">
-             <string>한식</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="menuButton_2">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>60</height>
-             </size>
-            </property>
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="text">
-             <string>백반</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="menuButton_3">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>60</height>
-             </size>
-            </property>
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="text">
-             <string>분식</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="menuButton_4">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>60</height>
-             </size>
-            </property>
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="text">
-             <string>양식</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="menuButton_5">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>60</height>
-             </size>
-            </property>
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="text">
-             <string>일식</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="menuButton_6">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>60</height>
-             </size>
-            </property>
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="text">
-             <string>음료</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </widget>
        <widget class="QWidget" name="payWidget" native="true">
         <property name="geometry">
          <rect>
-          <x>0</x>
-          <y>550</y>
-          <width>800</width>
+          <x>20</x>
+          <y>540</y>
+          <width>760</width>
           <height>200</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: white;
+background-color: rgb(58, 134, 255);
+border: 3px solid rgb(58, 134, 255);
+border-radius: 12px;</string>
         </property>
         <widget class="QListWidget" name="selectMenuList">
          <property name="geometry">
           <rect>
-           <x>20</x>
-           <y>0</y>
-           <width>491</width>
-           <height>200</height>
+           <x>10</x>
+           <y>10</y>
+           <width>400</width>
+           <height>180</height>
           </rect>
          </property>
          <property name="font">
@@ -576,6 +774,11 @@
          <property name="focusPolicy">
           <enum>Qt::ClickFocus</enum>
          </property>
+         <property name="styleSheet">
+          <string notr="true">border: 3px solid rgb(255, 190, 11);
+background-color: white;
+color:rgb(58, 134, 255);</string>
+         </property>
          <property name="editTriggers">
           <set>QAbstractItemView::NoEditTriggers</set>
          </property>
@@ -583,10 +786,10 @@
         <widget class="QPushButton" name="payButton">
          <property name="geometry">
           <rect>
-           <x>579</x>
+           <x>500</x>
            <y>130</y>
-           <width>210</width>
-           <height>71</height>
+           <width>260</width>
+           <height>70</height>
           </rect>
          </property>
          <property name="font">
@@ -597,6 +800,13 @@
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
          </property>
+         <property name="styleSheet">
+          <string notr="true">color: white;
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0.857143, y2:0.857955, stop:0 rgba(10, 242, 251, 255), stop:1 rgba(224, 6, 159, 255));
+border:0px;
+border-radius: 12px;
+</string>
+         </property>
          <property name="text">
           <string>결제하기</string>
          </property>
@@ -604,10 +814,10 @@
         <widget class="QPushButton" name="deleteMenuButton">
          <property name="geometry">
           <rect>
-           <x>700</x>
+           <x>670</x>
            <y>0</y>
-           <width>90</width>
-           <height>80</height>
+           <width>91</width>
+           <height>131</height>
           </rect>
          </property>
          <property name="font">
@@ -618,6 +828,12 @@
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
          </property>
+         <property name="styleSheet">
+          <string notr="true">color: white;
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(255, 190, 11, 255), stop:1 rgba(251, 86, 7, 255));
+border: 0px;
+border-radius: 12px;</string>
+         </property>
          <property name="text">
           <string>삭제</string>
          </property>
@@ -625,9 +841,9 @@
         <widget class="QLabel" name="label_2">
          <property name="geometry">
           <rect>
-           <x>610</x>
-           <y>30</y>
-           <width>60</width>
+           <x>560</x>
+           <y>36</y>
+           <width>40</width>
            <height>16</height>
           </rect>
          </property>
@@ -635,6 +851,9 @@
           <font>
            <pointsize>16</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: 0px;</string>
          </property>
          <property name="text">
           <string>수량</string>
@@ -646,14 +865,25 @@
         <widget class="QPushButton" name="addCountButton">
          <property name="geometry">
           <rect>
-           <x>600</x>
-           <y>0</y>
-           <width>81</width>
-           <height>32</height>
+           <x>500</x>
+           <y>20</y>
+           <width>50</width>
+           <height>50</height>
           </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
          </property>
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(251, 86, 7);
+	background-color: white;
+	border: 2px solid rgb(251, 86, 7);
+	border-radius: 5px;</string>
          </property>
          <property name="text">
           <string>추가</string>
@@ -662,14 +892,20 @@
         <widget class="QPushButton" name="deleteCountButton">
          <property name="geometry">
           <rect>
-           <x>600</x>
-           <y>50</y>
-           <width>81</width>
-           <height>32</height>
+           <x>610</x>
+           <y>20</y>
+           <width>50</width>
+           <height>50</height>
           </rect>
          </property>
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(131, 56, 236);
+	background-color: white;
+	border: 3px solid rgb(131, 56, 236);
+	border-radius: 5px;</string>
          </property>
          <property name="text">
           <string>빼기</string>
@@ -678,17 +914,20 @@
         <widget class="QLabel" name="money_label">
          <property name="geometry">
           <rect>
-           <x>610</x>
-           <y>100</y>
+           <x>500</x>
+           <y>90</y>
            <width>111</width>
-           <height>21</height>
+           <height>30</height>
           </rect>
          </property>
          <property name="font">
           <font>
-           <pointsize>20</pointsize>
+           <pointsize>30</pointsize>
            <underline>true</underline>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: 0px;</string>
          </property>
          <property name="text">
           <string>0</string>
@@ -700,7 +939,7 @@
         <widget class="QLabel" name="won_label">
          <property name="geometry">
           <rect>
-           <x>730</x>
+           <x>620</x>
            <y>100</y>
            <width>21</width>
            <height>20</height>
@@ -710,6 +949,9 @@
           <font>
            <pointsize>18</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: 0px;</string>
          </property>
          <property name="text">
           <string>원</string>
@@ -721,18 +963,257 @@
         <widget class="QListWidget" name="selectMenuCountList">
          <property name="geometry">
           <rect>
-           <x>510</x>
-           <y>0</y>
-           <width>61</width>
-           <height>201</height>
+           <x>420</x>
+           <y>10</y>
+           <width>60</width>
+           <height>180</height>
           </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
          <property name="font">
           <font>
            <pointsize>18</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">border: 3px solid rgb(255, 190, 11);
+background-color: white;
+color:rgb(58, 134, 255);</string>
+         </property>
         </widget>
+        <zorder>payButton</zorder>
+        <zorder>selectMenuList</zorder>
+        <zorder>deleteMenuButton</zorder>
+        <zorder>label_2</zorder>
+        <zorder>addCountButton</zorder>
+        <zorder>deleteCountButton</zorder>
+        <zorder>money_label</zorder>
+        <zorder>won_label</zorder>
+        <zorder>selectMenuCountList</zorder>
+       </widget>
+       <widget class="QWidget" name="horizontalWidget" native="true">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>760</width>
+          <height>62</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetDefaultConstraint</enum>
+         </property>
+         <item>
+          <widget class="QPushButton" name="menuButton_1">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>60</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>20</pointsize>
+            </font>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(255, 190, 11);
+	background-color: white;
+	border: 3px solid rgb(255, 190, 11);
+	border-radius: 12px;</string>
+           </property>
+           <property name="text">
+            <string>한식</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="menuButton_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>60</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>20</pointsize>
+            </font>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(251, 86, 7);
+	background-color: white;
+	border: 3px solid rgb(251, 86, 7);
+	border-radius: 12px;</string>
+           </property>
+           <property name="text">
+            <string>중식</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="menuButton_3">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>60</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>20</pointsize>
+            </font>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(255, 0, 110);
+	background-color: white;
+	border: 3px solid rgb(255, 0, 110);
+	border-radius: 12px;</string>
+           </property>
+           <property name="text">
+            <string>분식</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="menuButton_4">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>60</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>20</pointsize>
+            </font>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(58, 134, 255);
+	background-color: white;
+	border: 3px solid rgb(58, 134, 255);
+	border-radius: 12px;</string>
+           </property>
+           <property name="text">
+            <string>양식</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="menuButton_5">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>60</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>20</pointsize>
+            </font>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(4, 51, 255);
+	background-color: white;
+	border: 3px solid rgb(4, 51, 255);
+	border-radius: 12px;</string>
+           </property>
+           <property name="text">
+            <string>일식</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="menuButton_6">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>60</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>20</pointsize>
+            </font>
+           </property>
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(131, 56, 236);
+	background-color: white;
+	border: 3px solid rgb(131, 56, 236);
+	border-radius: 12px;</string>
+           </property>
+           <property name="text">
+            <string>음료</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </widget>
       <widget class="QWidget" name="pay">
@@ -750,6 +1231,9 @@
           <pointsize>50</pointsize>
          </font>
         </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(58, 134, 255);</string>
+        </property>
         <property name="text">
          <string>주문 완료</string>
         </property>
@@ -758,76 +1242,6 @@
         </property>
        </widget>
       </widget>
-     </widget>
-    </item>
-    <item row="0" column="0" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-     <widget class="QWidget" name="titleWidget" native="true">
-      <property name="minimumSize">
-       <size>
-        <width>800</width>
-        <height>80</height>
-       </size>
-      </property>
-      <property name="baseSize">
-       <size>
-        <width>800</width>
-        <height>80</height>
-       </size>
-      </property>
-      <widget class="QLabel" name="title">
-       <property name="geometry">
-        <rect>
-         <x>250</x>
-         <y>20</y>
-         <width>320</width>
-         <height>40</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;학식당&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="homeButton">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>10</y>
-         <width>60</width>
-         <height>60</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>home</string>
-       </property>
-      </widget>
-     </widget>
-    </item>
-    <item row="2" column="0" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-     <widget class="QWidget" name="bottomWidget" native="true">
-      <property name="minimumSize">
-       <size>
-        <width>800</width>
-        <height>40</height>
-       </size>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_3">
-         <property name="minimumSize">
-          <size>
-           <width>100</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>BY Boogie Voice</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-      </layout>
      </widget>
     </item>
    </layout>
