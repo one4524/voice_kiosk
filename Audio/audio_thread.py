@@ -2,7 +2,7 @@
 from PyQt5.QtCore import QThread
 import playsound
 
-from Audio.audio_routine import audio_routine, delete_order
+from Audio.audio_routine import audio_routine
 from Audio.tts import make_tts
 
 
@@ -21,13 +21,22 @@ class AudioThread(QThread):
                 n = self.step2()
                 if n != -1:  # 메뉴 선택
                     if self.step3(n) == 0:  # 음식 선택
-                        again_or_pay = self.step4()  # 추가 주문 or 결제
-                        if again_or_pay == 1:
-                            continue  # 추가 주문
-                        elif again_or_pay == 0:
-                            state = True
-                            self.step5_final()  # 결제
-                            break
+                        step4_loop = False
+                        while True:
+                            again_or_pay = self.step4()  # 추가 주문 or 결제
+                            if again_or_pay == 1:
+                                step4_loop = True
+                                break  # 추가 주문
+                            elif again_or_pay == 0:
+                                state = True
+                                self.step5_final()  # 결제
+                                break
+                            elif again_or_pay == 2:   # 삭제
+                                continue
+                            else:
+                                break
+                        if step4_loop:
+                            continue    # 추가 주문
                         else:
                             break
                     else:
@@ -98,7 +107,7 @@ class AudioThread(QThread):
                 return -1
 
             key = self.menu_list[m]
-            n = audio_routine(2, key)
+            n = audio_routine(2, menu_name=key)
             if n == -1:
                 if count < 1:  # 2번만 확인
                     playsound.playsound("static/mp3_file/again.mp3")
@@ -144,8 +153,19 @@ class AudioThread(QThread):
                 tts_text += "입니다. 어떤 메뉴를 삭제하시겠습니까?"
                 make_tts(tts_text)
                 # tts 재생
-                self.parent.select_list_item = delete_order(self.parent.order_list)
-                self.parent.list_item_delete_event()
+                playsound.playsound("order_list.mp3")
+                # 삭제할 음식 이름 음성 받기
+                success_delete_num = audio_routine(4, order_list=self.parent.order_list)
+                if success_delete_num != -1:
+                    self.parent.select_list_item = success_delete_num
+                    self.parent.list_item_delete_event()
+                    print("삭제 성공")
+                    playsound.playsound("static/mp3_file/delete_success.mp3")
+                else:
+                    playsound.playsound("static/mp3_file/delete_fail.mp3")
+                    print("삭제 실패")
+
+                return 2
 
             else:
                 return 1  # 추가 주문

@@ -57,22 +57,8 @@ second_list = menu
 third_list = ['결제', '결재', '끝', '그만', '주문', '추가', '메뉴', '음식', '삭제']
 
 
-def delete_order(order_list):
-    audio = Audio()
-    text = audio.listen()
-    text_correct = audio.text_correction(text)
-    text_word_list = audio.detect_word(text_correct)
-
-    for i, m in enumerate(order_list):
-        for _, v in menu.items():
-            if m in v:
-                return i
-
-    return -1
-
-
 # 음성 인식 함수
-def audio_routine(step, menu_name=None):
+def audio_routine(step, menu_name=None, order_list=None):
     audio = Audio()
     text = audio.listen()
     text_correct = audio.text_correction(text)
@@ -157,4 +143,23 @@ def audio_routine(step, menu_name=None):
         else:
             return -1
 
+    # 삭제할 음식 선택 단계
+    elif step == 4:
+        if order_list is not None:
+            for index, order in enumerate(order_list):
+                for keyword in menu_keyword[order]:
+                    # 키워드 비교
+                    if keyword in text_word_list:
+                        return index
+
+                # 텍스트 유사도 분석
+                similarity_num = compare_text(text_word_list, menu_keyword[order])
+                if similarity_num != -1:
+                    return index
+                else:
+                    return -1
+
     return -1
+
+
+

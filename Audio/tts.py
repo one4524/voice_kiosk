@@ -22,6 +22,15 @@ m6 = "음료 메뉴의 종류는 '물', '콜라', '사이다', '환타', '제로
 err = "잘못된 메뉴입니다."
 again = "다시 말해주세요."
 
+delete_success = "삭제 성공"
+delete_fail = "삭제 실패"
+
+tts_del_success = gTTS(text=delete_success, lang='ko')
+tts_del_success.save("delete_success.mp3")
+
+tts_del_fail = gTTS(text=delete_fail, lang='ko')
+tts_del_fail.save("delete_fail.mp3")
+
 tts = gTTS(text=t1, lang='ko')
 
 tts.save("play1.mp3")
