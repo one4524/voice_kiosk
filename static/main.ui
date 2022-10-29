@@ -96,13 +96,13 @@ padding:0px;</string>
         <enum>QLayout::SetMaximumSize</enum>
        </property>
        <property name="leftMargin">
-        <number>10</number>
+        <number>50</number>
        </property>
        <property name="topMargin">
         <number>10</number>
        </property>
        <property name="rightMargin">
-        <number>10</number>
+        <number>50</number>
        </property>
        <property name="bottomMargin">
         <number>10</number>
@@ -134,6 +134,15 @@ padding:0px;</string>
        </item>
        <item>
         <widget class="QLabel" name="title">
+         <property name="font">
+          <font>
+           <family>.AppleSystemUIFont</family>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+           <underline>false</underline>
+          </font>
+         </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;부기식당&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
@@ -216,19 +225,22 @@ padding:0px;</string>
        </size>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: white;</string>
+       <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="start">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
        <widget class="QPushButton" name="stayButton">
         <property name="geometry">
          <rect>
-          <x>160</x>
-          <y>150</y>
-          <width>230</width>
-          <height>340</height>
+          <x>100</x>
+          <y>100</y>
+          <width>280</width>
+          <height>420</height>
          </rect>
         </property>
         <property name="font">
@@ -240,21 +252,37 @@ padding:0px;</string>
          <enum>Qt::NoFocus</enum>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: white;
-	background-color: rgb(0, 144, 81);
+         <string notr="true">color: rgb(0, 84, 147);
+	background-color: white;
+	border: 10px solid rgb(0, 84, 147);
 	border-radius: 20px;</string>
         </property>
         <property name="text">
-         <string>매장 이용</string>
+         <string>
+
+
+
+
+
+매장 이용</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>200</width>
+          <height>200</height>
+         </size>
+        </property>
+        <property name="autoExclusive">
+         <bool>false</bool>
         </property>
        </widget>
        <widget class="QPushButton" name="takeOutButton">
         <property name="geometry">
          <rect>
           <x>410</x>
-          <y>150</y>
-          <width>230</width>
-          <height>340</height>
+          <y>100</y>
+          <width>280</width>
+          <height>420</height>
          </rect>
         </property>
         <property name="font">
@@ -269,26 +297,36 @@ padding:0px;</string>
          <number>0</number>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: white;
-	background-color: rgb(0, 84, 147);
+         <string notr="true">color: rgb(0, 84, 147);
+	background-color: white;
+	border: 10px solid rgb(0, 84, 147);
 	border-radius: 20px;</string>
         </property>
         <property name="text">
-         <string>메뉴 포장</string>
+         <string>
+
+
+
+
+
+메뉴 포장</string>
         </property>
        </widget>
        <widget class="QPushButton" name="audioButton">
         <property name="geometry">
          <rect>
-          <x>160</x>
-          <y>510</y>
-          <width>480</width>
-          <height>60</height>
+          <x>100</x>
+          <y>550</y>
+          <width>590</width>
+          <height>80</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <pointsize>24</pointsize>
+          <pointsize>30</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <underline>true</underline>
          </font>
         </property>
         <property name="focusPolicy">
@@ -296,29 +334,128 @@ padding:0px;</string>
         </property>
         <property name="styleSheet">
          <string notr="true">color: white;
-	background-color: rgb(121, 121, 121);
+	background-color: rgb(58, 134, 255);
+	border: 8px solid rgb(58, 134, 255);
 	border-radius: 10px;</string>
         </property>
         <property name="text">
          <string>음성으로 안내</string>
         </property>
        </widget>
+       <widget class="QPushButton" name="stay2Button">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>180</y>
+          <width>200</width>
+          <height>200</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>200</height>
+         </size>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">text-align:left;
+background-color: white;
+border:0px;
+border-radius: 10px;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>195</width>
+          <height>200</height>
+         </size>
+        </property>
+        <property name="autoRepeatDelay">
+         <number>0</number>
+        </property>
+        <property name="autoRepeatInterval">
+         <number>0</number>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="takeout2Button">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>180</y>
+          <width>200</width>
+          <height>200</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>200</height>
+         </size>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">text-align:left;
+background-color: white;
+border:0px;
+border-radius: 10px;
+</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>195</width>
+          <height>200</height>
+         </size>
+        </property>
+        <property name="autoRepeatDelay">
+         <number>0</number>
+        </property>
+        <property name="autoRepeatInterval">
+         <number>0</number>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="main">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
        <widget class="QStackedWidget" name="menuStackedWidget">
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>80</y>
+          <y>90</y>
           <width>760</width>
           <height>450</height>
          </rect>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: white;
-border: 2px solid rgb(58, 134, 255);
-border-radius: 15px;
-color:rgb(58, 134, 255);</string>
+border: 3px solid rgb(0, 84, 147);
+border-radius: 12px;
+color:rgb(0, 84, 147);
+font: bold 14px;
+padding:3px;</string>
         </property>
         <property name="currentIndex">
          <number>5</number>
@@ -346,7 +483,13 @@ border-radius: 12px;</string>
           <property name="styleSheet">
            <string notr="true">border-radius: 12px;</string>
           </property>
+          <property name="lineWidth">
+           <number>0</number>
+          </property>
           <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
            <enum>Qt::ScrollBarAlwaysOff</enum>
           </property>
           <property name="editTriggers">
@@ -354,6 +497,9 @@ border-radius: 12px;</string>
           </property>
           <property name="selectionMode">
            <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="gridStyle">
+           <enum>Qt::NoPen</enum>
           </property>
           <property name="rowCount">
            <number>4</number>
@@ -368,10 +514,10 @@ border-radius: 12px;</string>
            <bool>false</bool>
           </attribute>
           <attribute name="horizontalHeaderMinimumSectionSize">
-           <number>151</number>
+           <number>150</number>
           </attribute>
           <attribute name="horizontalHeaderDefaultSectionSize">
-           <number>151</number>
+           <number>150</number>
           </attribute>
           <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
            <bool>false</bool>
@@ -425,11 +571,17 @@ border:0px;</string>
           <property name="verticalScrollBarPolicy">
            <enum>Qt::ScrollBarAlwaysOff</enum>
           </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
           </property>
           <property name="selectionMode">
            <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="gridStyle">
+           <enum>Qt::NoPen</enum>
           </property>
           <property name="rowCount">
            <number>4</number>
@@ -441,10 +593,10 @@ border:0px;</string>
            <bool>false</bool>
           </attribute>
           <attribute name="horizontalHeaderMinimumSectionSize">
-           <number>151</number>
+           <number>150</number>
           </attribute>
           <attribute name="horizontalHeaderDefaultSectionSize">
-           <number>151</number>
+           <number>150</number>
           </attribute>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>
@@ -493,11 +645,17 @@ border:0px;
           <property name="verticalScrollBarPolicy">
            <enum>Qt::ScrollBarAlwaysOff</enum>
           </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
           </property>
           <property name="selectionMode">
            <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="gridStyle">
+           <enum>Qt::NoPen</enum>
           </property>
           <property name="rowCount">
            <number>4</number>
@@ -509,10 +667,10 @@ border:0px;
            <bool>false</bool>
           </attribute>
           <attribute name="horizontalHeaderMinimumSectionSize">
-           <number>151</number>
+           <number>150</number>
           </attribute>
           <attribute name="horizontalHeaderDefaultSectionSize">
-           <number>151</number>
+           <number>150</number>
           </attribute>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>
@@ -560,11 +718,17 @@ border:0px;</string>
           <property name="verticalScrollBarPolicy">
            <enum>Qt::ScrollBarAlwaysOff</enum>
           </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
           </property>
           <property name="selectionMode">
            <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="gridStyle">
+           <enum>Qt::NoPen</enum>
           </property>
           <property name="rowCount">
            <number>4</number>
@@ -576,10 +740,10 @@ border:0px;</string>
            <bool>false</bool>
           </attribute>
           <attribute name="horizontalHeaderMinimumSectionSize">
-           <number>151</number>
+           <number>150</number>
           </attribute>
           <attribute name="horizontalHeaderDefaultSectionSize">
-           <number>151</number>
+           <number>150</number>
           </attribute>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>
@@ -630,11 +794,17 @@ border:0px;</string>
           <property name="verticalScrollBarPolicy">
            <enum>Qt::ScrollBarAlwaysOff</enum>
           </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
           </property>
           <property name="selectionMode">
            <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="gridStyle">
+           <enum>Qt::NoPen</enum>
           </property>
           <property name="rowCount">
            <number>4</number>
@@ -646,10 +816,10 @@ border:0px;</string>
            <bool>false</bool>
           </attribute>
           <attribute name="horizontalHeaderMinimumSectionSize">
-           <number>151</number>
+           <number>150</number>
           </attribute>
           <attribute name="horizontalHeaderDefaultSectionSize">
-           <number>151</number>
+           <number>150</number>
           </attribute>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>
@@ -695,9 +865,14 @@ border:0px;</string>
            <enum>Qt::NoFocus</enum>
           </property>
           <property name="styleSheet">
-           <string notr="true">border-radius: 12px;</string>
+           <string notr="true">border-radius: 12px;
+selection-color: rgb(58, 134, 255);
+selection-background-color: white;</string>
           </property>
           <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
            <enum>Qt::ScrollBarAlwaysOff</enum>
           </property>
           <property name="editTriggers">
@@ -705,6 +880,9 @@ border:0px;</string>
           </property>
           <property name="selectionMode">
            <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="gridStyle">
+           <enum>Qt::NoPen</enum>
           </property>
           <property name="rowCount">
            <number>4</number>
@@ -716,10 +894,10 @@ border:0px;</string>
            <bool>false</bool>
           </attribute>
           <attribute name="horizontalHeaderMinimumSectionSize">
-           <number>151</number>
+           <number>150</number>
           </attribute>
           <attribute name="horizontalHeaderDefaultSectionSize">
-           <number>151</number>
+           <number>150</number>
           </attribute>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>
@@ -746,7 +924,7 @@ border:0px;</string>
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>540</y>
+          <y>550</y>
           <width>760</width>
           <height>200</height>
          </rect>
@@ -777,7 +955,10 @@ border-radius: 12px;</string>
          <property name="styleSheet">
           <string notr="true">border: 3px solid rgb(255, 190, 11);
 background-color: white;
-color:rgb(58, 134, 255);</string>
+color:rgb(58, 134, 255);
+selection-color: white;
+selection-background-color: rgb(255, 190, 11);
+padding:0px;</string>
          </property>
          <property name="editTriggers">
           <set>QAbstractItemView::NoEditTriggers</set>
@@ -794,18 +975,17 @@ color:rgb(58, 134, 255);</string>
          </property>
          <property name="font">
           <font>
-           <pointsize>26</pointsize>
+           <pointsize>30</pointsize>
           </font>
          </property>
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
          </property>
          <property name="styleSheet">
-          <string notr="true">color: white;
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0.857143, y2:0.857955, stop:0 rgba(10, 242, 251, 255), stop:1 rgba(224, 6, 159, 255));
-border:0px;
-border-radius: 12px;
-</string>
+          <string notr="true">color: rgb(0, 84, 147);
+	background-color: white;
+	border: 6px solid rgb(0, 84, 147);
+	border-radius: 12px;</string>
          </property>
          <property name="text">
           <string>결제하기</string>
@@ -816,23 +996,23 @@ border-radius: 12px;
           <rect>
            <x>670</x>
            <y>0</y>
-           <width>91</width>
-           <height>131</height>
+           <width>90</width>
+           <height>130</height>
           </rect>
          </property>
          <property name="font">
           <font>
-           <pointsize>18</pointsize>
+           <pointsize>22</pointsize>
           </font>
          </property>
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
          </property>
          <property name="styleSheet">
-          <string notr="true">color: white;
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(255, 190, 11, 255), stop:1 rgba(251, 86, 7, 255));
-border: 0px;
-border-radius: 12px;</string>
+          <string notr="true">color: rgb(251, 86, 7);
+	background-color: white;
+	border: 6px solid rgb(251, 86, 7);
+	border-radius: 12px;</string>
          </property>
          <property name="text">
           <string>삭제</string>
@@ -873,7 +1053,7 @@ border-radius: 12px;</string>
          </property>
          <property name="font">
           <font>
-           <pointsize>16</pointsize>
+           <pointsize>15</pointsize>
           </font>
          </property>
          <property name="focusPolicy">
@@ -897,6 +1077,11 @@ border-radius: 12px;</string>
            <width>50</width>
            <height>50</height>
           </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>15</pointsize>
+          </font>
          </property>
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
@@ -983,7 +1168,10 @@ border-radius: 12px;</string>
          <property name="styleSheet">
           <string notr="true">border: 3px solid rgb(255, 190, 11);
 background-color: white;
-color:rgb(58, 134, 255);</string>
+color:rgb(58, 134, 255);
+selection-color: white;
+selection-background-color: rgb(255, 190, 11);
+padding:0px;</string>
          </property>
         </widget>
         <zorder>payButton</zorder>
@@ -1000,9 +1188,9 @@ color:rgb(58, 134, 255);</string>
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>10</y>
+          <y>0</y>
           <width>760</width>
-          <height>62</height>
+          <height>80</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -1038,9 +1226,9 @@ color:rgb(58, 134, 255);</string>
             <enum>Qt::NoFocus</enum>
            </property>
            <property name="styleSheet">
-            <string notr="true">color: rgb(255, 190, 11);
+            <string notr="true">color: rgb(0, 84, 147);
 	background-color: white;
-	border: 3px solid rgb(255, 190, 11);
+	border: 3px solid rgb(0, 84, 147);
 	border-radius: 12px;</string>
            </property>
            <property name="text">
@@ -1071,9 +1259,9 @@ color:rgb(58, 134, 255);</string>
             <enum>Qt::NoFocus</enum>
            </property>
            <property name="styleSheet">
-            <string notr="true">color: rgb(251, 86, 7);
+            <string notr="true">color: rgb(0, 84, 147);
 	background-color: white;
-	border: 3px solid rgb(251, 86, 7);
+	border: 3px solid rgb(0, 84, 147);
 	border-radius: 12px;</string>
            </property>
            <property name="text">
@@ -1104,9 +1292,9 @@ color:rgb(58, 134, 255);</string>
             <enum>Qt::NoFocus</enum>
            </property>
            <property name="styleSheet">
-            <string notr="true">color: rgb(255, 0, 110);
+            <string notr="true">color: rgb(0, 84, 147);
 	background-color: white;
-	border: 3px solid rgb(255, 0, 110);
+	border: 3px solid rgb(0, 84, 147);
 	border-radius: 12px;</string>
            </property>
            <property name="text">
@@ -1137,9 +1325,9 @@ color:rgb(58, 134, 255);</string>
             <enum>Qt::NoFocus</enum>
            </property>
            <property name="styleSheet">
-            <string notr="true">color: rgb(58, 134, 255);
+            <string notr="true">color: rgb(0, 84, 147);
 	background-color: white;
-	border: 3px solid rgb(58, 134, 255);
+	border: 3px solid rgb(0, 84, 147);
 	border-radius: 12px;</string>
            </property>
            <property name="text">
@@ -1170,9 +1358,9 @@ color:rgb(58, 134, 255);</string>
             <enum>Qt::NoFocus</enum>
            </property>
            <property name="styleSheet">
-            <string notr="true">color: rgb(4, 51, 255);
+            <string notr="true">color: rgb(0, 84, 147);
 	background-color: white;
-	border: 3px solid rgb(4, 51, 255);
+	border: 3px solid rgb(0, 84, 147);
 	border-radius: 12px;</string>
            </property>
            <property name="text">
@@ -1203,9 +1391,9 @@ color:rgb(58, 134, 255);</string>
             <enum>Qt::NoFocus</enum>
            </property>
            <property name="styleSheet">
-            <string notr="true">color: rgb(131, 56, 236);
+            <string notr="true">color: rgb(0, 84, 147);
 	background-color: white;
-	border: 3px solid rgb(131, 56, 236);
+	border: 3px solid rgb(0, 84, 147);
 	border-radius: 12px;</string>
            </property>
            <property name="text">

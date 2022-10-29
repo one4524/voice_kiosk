@@ -1,13 +1,12 @@
 import os
 import sys
 from PyQt5 import uic
-from PyQt5.QtCore import QThread, QEventLoop, QTimer, QSize
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QListWidgetItem
-import playsound
-from Audio.audio_routine import audio_routine, delete_order
-from Audio.tts import make_tts
-from Camera.video import EyesThread
-from db import insert_menus, insert_order, data_transform, create_table, drop_table
+from PyQt5.QtCore import Qt, QEventLoop, QTimer, QSize
+from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtWidgets import QApplication, QMainWindow, QListWidgetItem, QLabel, QWidget, QVBoxLayout
+from Audio.audio_thread import AudioThread
+from Camera.video_thread import EyesThread
+from DB.db import insert_menus, insert_order, data_transform, create_table, drop_table
 
 
 # UI파일 연결
@@ -40,156 +39,6 @@ table_idx_lookup = {'korean': 0, 'chinese': 1, 'schoolfood': 2, 'Westernfood': 3
 menu_list = ['korean', 'chinese', 'schoolfood', 'Westernfood', 'japanesefood', 'beverage']
 
 
-# 오디오 쓰레드
-class AudioThread(QThread):
-    def __init__(self, parent):
-        super().__init__(parent)
-        self.parent = parent
-        self.menu = menu
-
-    def run(self):
-        state = False
-        self.parent.button_set_enabled(False)
-        if self.step1() == 0:  # 음성 안내
-            while True:
-                n = self.step2()
-                if n != -1:  # 메뉴 선택
-                    if self.step3(n) == 0:  # 음식 선택
-                        again_or_pay = self.step4()  # 추가 주문 or 결제
-                        if again_or_pay == 1:
-                            continue  # 추가 주문
-                        elif again_or_pay == 0:
-                            state = True
-                            self.step5_final()  # 결제
-                            break
-                        else:
-                            break
-                    else:
-                        break
-                else:
-                    break
-
-        if not state:
-            # audio 루틴이 끝나면 실행
-            self.parent.homeButton.click()
-
-        self.parent.button_set_enabled(True)
-        self.quit()
-
-    def step1(self):
-        count = 0
-        while count < 3:
-            playsound.playsound("static/mp3_file/play1.mp3")
-            print("음성으로 안내받길 원하시나요?")
-            n = audio_routine(0)
-            if n < 3:  # 대답이 부정 혹은 오류 일때
-                if count < 2:  # 3번만 확인
-                    playsound.playsound("static/mp3_file/again.mp3")
-                    count += 1
-                else:
-                    return -1
-            else:
-                self.parent.stackedWidget.setCurrentIndex(1)
-                return 0
-
-    def step2(self):
-        count = 0
-        while count < 2:
-            playsound.playsound("static/mp3_file/play2.mp3")
-
-            print("어떤 메뉴를 원하시나요? 한식, 중식, 분식, 양식, 일식, 음료")
-            n = audio_routine(1)
-            if n == -1:
-                if count < 1:  # 2번만 확인
-                    playsound.playsound("static/mp3_file/again.mp3")
-                    count += 1
-                else:
-                    return -1
-            elif n == 6:
-                self.parent.menuStackedWidget.setCurrentIndex(0)
-            elif n == 7:
-                self.parent.menuStackedWidget.setCurrentIndex(1)
-            else:
-                self.parent.menuStackedWidget.setCurrentIndex(n)
-                return n
-
-    def step3(self, m):
-        count = 0
-        while count < 2:
-            print("해당 메뉴의 종류는 ~,~,~ 가 있습니다. 원하시는 메뉴를 말해주세요. ")
-            if m == 0:
-                playsound.playsound("static/mp3_file/menu1.mp3")
-            elif m == 1:
-                playsound.playsound("static/mp3_file/menu2.mp3")
-            elif m == 2:
-                playsound.playsound("static/mp3_file/menu3.mp3")
-            elif m == 3:
-                playsound.playsound("static/mp3_file/menu4.mp3")
-            elif m == 4:
-                playsound.playsound("static/mp3_file/menu5.mp3")
-            elif m == 5:
-                playsound.playsound("static/mp3_file/menu6.mp3")
-            else:
-                playsound.playsound("static/mp3_file/error.mp3")
-
-            n, key = audio_routine(2)
-            if n == -1:
-                if count < 1:  # 2번만 확인
-                    playsound.playsound("static/mp3_file/again.mp3")
-                    count += 1
-                else:
-                    return -1
-            else:
-                if key == menu_list[0]:
-                    self.parent.cell_clicked_event1(0, n)
-                elif key == menu_list[1]:
-                    self.parent.cell_clicked_event2(0, n)
-                elif key == menu_list[2]:
-                    self.parent.cell_clicked_event3(0, n)
-                elif key == menu_list[3]:
-                    self.parent.cell_clicked_event4(0, n)
-                elif key == menu_list[4]:
-                    self.parent.cell_clicked_event5(0, n)
-                elif key == menu_list[5]:
-                    self.parent.cell_clicked_event6(0, n)
-
-                print("선택 완료")
-                playsound.playsound("static/mp3_file/choice_complete.mp3")
-                return 0
-
-    def step4(self):
-        count = 0
-        while count < 2:
-            playsound.playsound("static/mp3_file/play4.mp3")
-            print("추가 주문이나 삭제를 원하십니까? 아니면 결제하시겠습니까?")
-            n = audio_routine(3)
-            if n == -1:
-                if count < 1:  # 2번만 확인
-                    playsound.playsound("static/mp3_file/again.mp3")
-                    count += 1
-                else:
-                    return -1
-            elif n < 4:
-                return 0  # 결제
-            elif n >= 8:  # 삭제
-                tts_text = "주문 목록은 "
-                for order in self.parent.order_list:
-                    tts_text += (order + ", ")
-                tts_text += "입니다. 어떤 메뉴를 삭제하시겠습니까?"
-                make_tts(tts_text)
-                # tts 재생
-                self.parent.select_list_item = delete_order(self.parent.order_list)
-                self.parent.list_item_delete_event()
-
-            else:
-                return 1  # 추가 주문
-
-    def step5_final(self):
-        print("허리 부근 중앙 오른쪽에 카드 리더기가 있습니다.")
-        print("결제 완료")
-        self.parent.pay_button_clicked_event()
-
-
 def reset():
     loop = QEventLoop()
     QTimer.singleShot(3000, loop.quit)  # msec
@@ -202,7 +51,7 @@ class WindowClass(QMainWindow, form_class):
         super().__init__()
         self.n = 0
         self.setupUi(self)
-        self.audio_thread = AudioThread(self)
+        self.audio_thread = AudioThread(self, menu)
         self.eyes_thread = EyesThread(self)
         self.step = 0
         self.order_number = 0
@@ -210,6 +59,28 @@ class WindowClass(QMainWindow, form_class):
         self.order_list = []
         self.order_count_list = []
         self.select_list_item = -1
+
+        self.start.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.setStyleSheet("background-color: rgb(255, 255, 255);")
+
+        # 매장 이용 버튼 설정
+        stay_pixmap = QPixmap('./static/stay.png')  # QPixmap 생성
+        stay_pixmap = stay_pixmap.scaled(195, 200, Qt.IgnoreAspectRatio)  # 이미지 크기 변경
+        stay_icon = QIcon()  # QIcon 생성
+        stay_icon.addPixmap(stay_pixmap)  # 아이콘에 이미지 설정
+
+        self.stay2Button.setIcon(stay_icon)  # Pushbutton에 아이콘 설정
+        self.stay2Button.clicked.connect(self.stayButtonFunction)
+
+        # 테이그아웃 버튼 설정
+        takeout_pixmap = QPixmap('./static/pickup.png')  # QPixmap 생성
+        takeout_pixmap = takeout_pixmap.scaled(195, 200, Qt.IgnoreAspectRatio)  # 이미지 크기 변경
+
+        takeout_icon = QIcon()  # QIcon 생성
+        takeout_icon.addPixmap(takeout_pixmap)  # 아이콘에 이미지 설정
+
+        self.takeout2Button.setIcon(takeout_icon)  # Pushbutton에 아이콘 설정
+        self.takeout2Button.clicked.connect(self.takeOutButtonFunction)
 
         # 버튼에 기능을 연결하는 코드
         # 첫 화면에 있는 버튼
@@ -232,8 +103,10 @@ class WindowClass(QMainWindow, form_class):
 
         # 테이블에 메뉴 세팅
         for k, v in menu.items():
-            til = table_idx_lookup[k]
-            self.set_menuTableWidgetData(self.tf_list[til], v)
+            table_index = table_idx_lookup[k]
+            self.tf_list[table_index].setStyleSheet(
+                "selection-color: rgb(58, 134, 255); selection-background-color: white;")
+            self.set_menuTableWidgetData(self.tf_list[table_index], v)
 
         # 메뉴 테이블 셀 클릭 이벤트
         self.tableWidget_1.cellClicked.connect(self.cell_clicked_event1)
@@ -482,25 +355,82 @@ class WindowClass(QMainWindow, form_class):
         self.audio_thread.start()
 
     # 각 메뉴의 테이블 아이템 정의하는 함수
-    def set_menuTableWidgetData(self, tf, v):
-        n = 0
-        r = 0
-        for col, val in enumerate(v):
-            item = QTableWidgetItem(val)
-            item.setTextAlignment(4)
+    def set_menuTableWidgetData(self, table_widget, value_list):
+        count = 0
+        row = 0
 
-            if col > 4 and r == 0:
-                r = 1
-                n = 0
-            elif col > 9 and r == 1:
-                r = 2
-                n = 0
-            elif col > 14 and r == 2:
-                r = 3
-                n = 0
-            tf.setItem(r, n, item)
-            n += 1
+        # 테이블에 넣을 커스텀 위젯 클래스 - 이미지와 텍스트 함께 존재
+        for col, val in enumerate(value_list):
+            cell_widget = QWidget(self)
+            cell_widget.setLayout(QVBoxLayout())
+            cell_pixmap_label = QLabel(self)
+            cell_text_label = QLabel(self)
+            pixmap = QPixmap(f'./static/menu_img/{val}.png')  # QPixmap 생성
+            pixmap = pixmap.scaled(120, 160, Qt.KeepAspectRatio)  # 이미지 크기 변경
+            cell_pixmap_label.setPixmap(pixmap)
+            cell_text_label.setAlignment(Qt.AlignCenter)
+            cell_text_label.setText(val)
 
+            cell_widget.layout().addWidget(cell_pixmap_label)
+            cell_widget.layout().addWidget(cell_text_label)
+
+            if col > 4 and row == 0:
+                row = 1
+                count = 0
+            elif col > 9 and row == 1:
+                row = 2
+                count = 0
+            elif col > 14 and row == 2:
+                row = 3
+                count = 0
+            table_widget.setCellWidget(row, count, cell_widget)
+            count += 1
+
+"""
+# 테이블에 넣을 커스텀 위젯 클래스 - 이미지와 텍스트 함께 존재
+class CustomWidget(QWidget):
+    def __init__(self, text, img, parent=None):
+        QWidget.__init__(self, parent)
+
+        self._text = text
+        self._img = img
+
+        self.setLayout(QVBoxLayout())
+        self.lbPixmap = QLabel(self)
+        self.lbText = QLabel(self)
+        self.lbText.setAlignment(Qt.AlignCenter)
+
+        self.layout().addWidget(self.lbPixmap)
+        self.layout().addWidget(self.lbText)
+
+        self.initUi()
+
+    def initUi(self):
+        self.lbPixmap.setPixmap(QPixmap(self._img).scaled(self.lbPixmap.size(), Qt.KeepAspectRatio))
+        self.lbText.setText(self._text)
+
+    @pyqtProperty(str)
+    def img(self):
+        return self._img
+
+    @img.setter
+    def total(self, value):
+        if self._img == value:
+            return
+        self._img = value
+        self.initUi()
+
+    @pyqtProperty(str)
+    def text(self):
+        return self._text
+
+    @text.setter
+    def text(self, value):
+        if self._text == value:
+            return
+        self._text = value
+        self.initUi()
+"""
 
 def window_start():
     app = QApplication(sys.argv)

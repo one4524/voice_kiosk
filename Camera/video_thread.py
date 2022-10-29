@@ -4,7 +4,6 @@ import numpy as np
 from PyQt5.QtCore import QThread
 from imutils import face_utils
 from keras.models import load_model
-import time
 
 # https://www.youtube.com/watch?v=dJjzTo8_x3c&ab_channel=%EB%B9%B5%ED%98%95%EC%9D%98%EA%B0%9C%EB%B0%9C%EB%8F%84%EC%83%81%EA%B5%AD
 # https://github.com/kairess/face_detection_comparison
@@ -147,4 +146,3 @@ class EyesThread(QThread):
 
             if count > 25:
                 return True
-
