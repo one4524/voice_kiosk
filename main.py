@@ -320,6 +320,7 @@ class WindowClass(QMainWindow, form_class):
     def audioButtonFunction(self):
         # 음성 인식
         self.eyes_thread.stop()
+        self.homeButton.setEnabled(True)
         self.audio_routine()
 
     # 한식 버튼 함수

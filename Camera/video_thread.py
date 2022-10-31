@@ -91,6 +91,10 @@ class EyesThread(QThread):
             img_ori = cv2.resize(img_ori, dsize=(0, 0), fx=0.5, fy=0.5)
 
             img = img_ori.copy()
+            # h, w, _ = img.shape
+            # img_matrix = cv2.getRotationMatrix2D((w/2, h/2), 270, 1)
+            # img_affine = cv2.warpAffine(img, img_matrix, (w, h))
+            # img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
             faces = detector(gray)

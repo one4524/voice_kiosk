@@ -14,7 +14,7 @@ menu_keyword = {
     '김치햄치즈볶음밥': ['김치', '햄', '치즈', '볶음밥'],
     '소금덮밥': ['소금', '덮밥'],
     '뼈다귀해장국': ['뼈다귀', '해장국', '해장'],
-    '소고기미역국': ['소고기', '미역', '미역국'],
+    '소고기미역국': ['소', '고기', '미역', '미역국'],
     '냉면': ['냉', '면', '냉면'],
     '간장불고기': ['간장', '불', '불고기'],
     '제육볶음': ['제육', '볶음'],
@@ -104,8 +104,10 @@ def audio_routine(step, menu_name=None, order_list=None):
 
         # 3단계
         if menu_name is not None:
+
             for i, food in enumerate(second_list[menu_name]):
                 for keyword in menu_keyword[food]:
+                    print("keyword-- ", keyword)
                     # 키워드 비교
                     if keyword in text_word_list:
                         return i
@@ -114,8 +116,6 @@ def audio_routine(step, menu_name=None, order_list=None):
                 similarity_num = compare_text(text_word_list, menu_keyword[food])
                 if similarity_num != -1:
                     return i
-                else:
-                    return -1
 
         else:
             for key, value in second_list.items():
@@ -156,8 +156,7 @@ def audio_routine(step, menu_name=None, order_list=None):
                 similarity_num = compare_text(text_word_list, menu_keyword[order])
                 if similarity_num != -1:
                     return index
-                else:
-                    return -1
+
 
     return -1
 

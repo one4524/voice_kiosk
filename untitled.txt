@@ -1,0 +1,16 @@
+환경설정
+
+Anaconda3 가상환경
+
+Python : 3.8
+
+GUI 환경 : PyQt5
+
+
+Tensorflow : 2.3.0
+
+오디오 관련 라이브러리 : qtts, playsound, pyaudio, speechRecognition
+
+비디오 관련 라이브러리 : Opencv-python, cmake, dlib
+
+텍스트 관련 라이브러리 : py-hanspell

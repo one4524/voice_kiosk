@@ -45,7 +45,6 @@ class AudioThread(QThread):
                     break
         else:
             self.parent.eyes_routine()
-
         if not state:
             # audio 루틴이 끝나면 실행
             self.parent.homeButton.click()
