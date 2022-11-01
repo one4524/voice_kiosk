@@ -24,6 +24,7 @@ class Audio:
     # 음성 오타 수정
     @staticmethod
     def text_correction(text):
+        print("correct")
         collect_text = spell_checker.check(text)
 
         return collect_text.as_dict()['checked']
@@ -82,6 +83,14 @@ class Audio:
             print("Say something!")
             audio = self.r.listen(source, phrase_time_limit=5)
 
+        # write audio to a WAV file
+        with open("microphone-results.wav", "wb") as f:
+            f.write(audio.get_wav_data())
+
+        text = self.r.recognize_google(audio, language='ko')
+        print("audio__ ", text)
+        return text
+"""
         audio_contents = base64.b64encode(audio.get_wav_data()).decode("utf8")
 
         voice_request_json = {
@@ -106,3 +115,5 @@ class Audio:
         json_obj = json.loads(str(response.data, "utf-8"))
 
         return json_obj["return_object"]['recognized']
+
+"""

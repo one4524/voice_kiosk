@@ -2,7 +2,10 @@ import sqlite3
 import os
 
 # db 경로
-db_path = os.getenv('HOME') + '/etridb.db'
+# mac
+# db_path = os.getenv('HOME') + '/etridb.db'
+# window
+db_path = 'etridb'
 
 
 # 테이블 생성

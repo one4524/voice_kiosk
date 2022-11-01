@@ -3,7 +3,7 @@ import dlib
 import numpy as np
 from PyQt5.QtCore import QThread
 from imutils import face_utils
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 
 # https://www.youtube.com/watch?v=dJjzTo8_x3c&ab_channel=%EB%B9%B5%ED%98%95%EC%9D%98%EA%B0%9C%EB%B0%9C%EB%8F%84%EC%83%81%EA%B5%AD
 # https://github.com/kairess/face_detection_comparison
@@ -126,9 +126,9 @@ class EyesThread(QThread):
                 # state_l = state_l % pred_l
                 # state_r = state_r % pred_r
 
-                if pred_l < 0.3 and pred_r < 0.3:
+                if pred_l < 0.2 and pred_r < 0.2:
                     count += 1
-                elif pred_l > 0.8 or pred_r > 0.8:
+                elif pred_l > 0.6 or pred_r > 0.6:
                     count = 0
 
             """
@@ -150,3 +150,5 @@ class EyesThread(QThread):
 
             if count > 25:
                 return True
+
+        cap.release()

@@ -1,0 +1,11 @@
+pyinstaller --clean -w -F --add-data="test_files/*;test_files" test.py
+
+
+pyinstaller --add-data="test_files/*;test_files" test.py
+
+
+for d in a.datas:
+     if '_C.cp38-win_amd64.pyd' in d[0]:
+          a.datas.remove(d)
+     if '_C.flatbuffer.cp38-win_amd64.pyd' in d[0]:
+          a.datas.remove(d)
