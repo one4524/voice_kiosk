@@ -84,11 +84,12 @@ class Audio:
             audio = self.r.listen(source, phrase_time_limit=5)
 
         # write audio to a WAV file
-        with open("microphone-results.wav", "wb") as f:
-            f.write(audio.get_wav_data())
+        # with open("microphone-results.wav", "wb") as f:
+        #     f.write(audio.get_wav_data())
 
         text = self.r.recognize_google(audio, language='ko')
         print("audio__ ", text)
+
         return text
 """
         audio_contents = base64.b64encode(audio.get_wav_data()).decode("utf8")

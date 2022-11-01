@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 import os
+
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = "2"
 import sys
 import urllib3
@@ -569,6 +570,7 @@ class EyesThread(QThread):
 
         cap.release()
 
+
 ## --------------------눈 검출 클래스 끝------------------------------ ##
 
 """
@@ -693,6 +695,7 @@ class Audio:
 
     """
 
+
 menu = {
     'korean': ['김치햄치즈볶음밥', '소금덮밥', '뼈다귀해장국', '소고기미역국', '냉면', '간장불고기', '제육볶음'],
     'chinese': ['짜장면', '짬뽕', '계란볶음밥', '탕수육', '군만두'],
@@ -784,8 +787,7 @@ def audio_routine(step, menu_name=None, order_list=None):
         similarity_num = compare_text(text_word_list, first_list)
         if similarity_num != -1:
             return similarity_num
-        else:
-            return -1
+
 
     # 음식 선정 단계
     elif step == 2:
@@ -806,8 +808,7 @@ def audio_routine(step, menu_name=None, order_list=None):
                 similarity_num = compare_text(text_word_list, menu_keyword[food])
                 if similarity_num != -1:
                     return i
-                else:
-                    return -1
+
 
         else:
             for key, value in second_list.items():
@@ -832,8 +833,7 @@ def audio_routine(step, menu_name=None, order_list=None):
         similarity_num = compare_text(text_word_list, third_list)
         if similarity_num != -1:
             return similarity_num
-        else:
-            return -1
+
 
     # 삭제할 음식 선택 단계
     elif step == 4:
@@ -848,8 +848,6 @@ def audio_routine(step, menu_name=None, order_list=None):
                 similarity_num = compare_text(text_word_list, menu_keyword[order])
                 if similarity_num != -1:
                     return index
-                else:
-                    return -1
 
     return -1
 

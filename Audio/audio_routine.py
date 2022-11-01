@@ -71,6 +71,7 @@ def audio_routine(step, menu_name=None, order_list=None):
             if t in text_word_list:
                 return -1
 
+        print("1단계")
         # 1단계
         for i, t in enumerate(answer_list):
             if t in text_word_list:
@@ -83,6 +84,7 @@ def audio_routine(step, menu_name=None, order_list=None):
             if t in text_word_list:
                 return -1
 
+        print("2단계")
         # 2단계
         for i, t in enumerate(first_list):
             if t in text_word_list:
@@ -92,8 +94,7 @@ def audio_routine(step, menu_name=None, order_list=None):
         similarity_num = compare_text(text_word_list, first_list)
         if similarity_num != -1:
             return similarity_num
-        else:
-            return -1
+
 
     # 음식 선정 단계
     elif step == 2:
@@ -140,8 +141,7 @@ def audio_routine(step, menu_name=None, order_list=None):
         similarity_num = compare_text(text_word_list, third_list)
         if similarity_num != -1:
             return similarity_num
-        else:
-            return -1
+
 
     # 삭제할 음식 선택 단계
     elif step == 4:
@@ -157,8 +157,4 @@ def audio_routine(step, menu_name=None, order_list=None):
                 if similarity_num != -1:
                     return index
 
-
     return -1
-
-
-
