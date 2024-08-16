@@ -1,7 +1,6 @@
 # -*- coding:utf-8 -*-
 import urllib3
 import json
-import base64
 import speech_recognition as sr
 from hanspell import spell_checker
 

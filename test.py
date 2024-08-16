@@ -1,18 +1,15 @@
 # -*- coding:utf-8 -*-
 import os
-
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = "2"
 import sys
 import urllib3
 import json
-import base64
 import speech_recognition as sr
 from hanspell import spell_checker
 import cv2
 import dlib
 import numpy as np
 from imutils import face_utils
-from tensorflow.keras.models import load_model
+from keras.models import load_model
 from PyQt5 import uic
 from PyQt5.QtCore import Qt, QEventLoop, QTimer, QSize, QThread
 from PyQt5.QtGui import QPixmap, QIcon, QFontDatabase, QFont
@@ -21,6 +18,7 @@ import sqlite3
 import playsound
 from gtts import gTTS
 import pyaudio
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = "2"
 
 pyaudio.get_portaudio_version()
 

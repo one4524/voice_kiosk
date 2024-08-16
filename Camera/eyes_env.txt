@@ -1,0 +1,24 @@
+# https://www.youtube.com/watch?v=dJjzTo8_x3c&ab_channel=%EB%B9%B5%ED%98%95%EC%9D%98%EA%B0%9C%EB%B0%9C%EB%8F%84%EC%83%81%EA%B5%AD
+# https://github.com/kairess/face_detection_comparison
+# https://mslilsunshine.tistory.com/70
+
+# https://github.com/kairess/eye_blink_detector
+# https://github.com/davisking/dlib-models
+# https://www.youtube.com/watch?v=tpWVyJqehG4&ab_channel=%EB%B9%B5%ED%98%95%EC%9D%98%EA%B0%9C%EB%B0%9C%EB%8F%84%EC%83%81%EA%B5%AD
+
+# pip install opencv-python
+# pip install imutils
+# conda install tensorflow
+
+# https://cmake.org/download/ 에서 cmake 설치
+# pip install cmake
+
+# visual studio c++ 관련 빌드 도구와 cmake 도구 설치
+# https://visualstudio.microsoft.com/ko/visual-cpp-build-tools/
+
+# dlib 설치
+# https://velog.io/@siyeon-hwang/anaconda-dlib-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0
+# 아래 순서대로 설치
+# conda install -c conda-forge dlib
+# conda install -c conda-forge/label/cf201901 dlib
+# conda install -c conda-forge/label/cf202003 dlib

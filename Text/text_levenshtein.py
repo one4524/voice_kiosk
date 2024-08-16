@@ -127,10 +127,11 @@ def jamo_levenshtein(s1, s2, debug=False):
 
     return previous_row[-1]
 
-
+"""
 if __name__ == "__main__":
     a = "한식"
     b = "한"
 
     similarity = jamo_levenshtein(a, b, debug=True)
     print(similarity)
+"""
